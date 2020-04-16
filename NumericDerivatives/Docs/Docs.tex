@@ -1,0 +1,34 @@
+\documentclass{article}
+    % General document formatting
+    \usepackage[margin=0.7in]{geometry}
+    \usepackage[parfill]{parskip}
+    \usepackage[utf8]{inputenc}
+
+    % Related to math
+    \usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+\begin{document}
+
+\begin{align*}
+f(x \pm n \delta) = f^{(0)}(x) \Big[ 1 \Big] + f^{(1)}(x) \Big[ \pm n \delta \Big] + f^{(2)}(x) \Big[ \frac{n^2 \delta^2}{2} \Big] + f^{(3)}(x) \Big[ \pm \frac{n^3 \delta^3}{6} \Big] + \mathcal{O} \big(\delta^4 \big)
+\end{align*}
+
+
+\vspace{2cm}
+Five Point Symmetric Stencil:
+
+\begin{align*}
+f(x) &= f^{(0)}(x) \\
+f(x+\delta) - f(x-\delta) &= f^{(1)}(x) \Big[ 2 \delta \Big] + f^{(3)}(x) \Big[ \frac{\delta^3}{3} \Big] + \mathcal{O}(\delta^5)\\
+f(x+2\delta) - f(x - 2 \delta) &= f^{(1)}(x) \Big[4 \delta \Big] + f^{(3)}(x) \Big[ \frac{8 \delta^3}{3}\Big] + \mathcal{O}(\delta^5)
+\end{align*}
+
+\hrule
+\begin{align}
+&8 \left( f(x+\delta) - f(x-\delta) \right) - \left( f(x+2\delta) - f(x-2\delta) \right) = f^{(1)}(x) \Big[12 \delta \Big] + \mathcal{O}(\delta^5) \\
+&\nonumber \\
+&f^{(1)}(x) \approx \frac{8 \left( f(x+\delta) - f(x-\delta) \right) - \left( f(x+2\delta) - f(x-2\delta) \right)}{12 \delta}
+\end{align}
+
+
+\end{document}
