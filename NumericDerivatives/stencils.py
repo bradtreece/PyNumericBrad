@@ -91,6 +91,8 @@ def D1_5(data, step, axis = -1):
         axis = len(data_shape) - 1
     elif ((axis == 1) and (len(data_shape) != 2)):
         raise ValueError("'axis' can only be equal to 1 for two-dimensional data")
+    elif axis==0:
+        pass
     else:
         raise ValueError("'axis' can only have the value -1, 0, or 1")
     
