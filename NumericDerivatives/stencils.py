@@ -13,7 +13,7 @@ def test_func():
     print("You did it!")
     
 def __Five_Point_Stencil(p, h):
-    """ Apply a five point stencil to p[0:5] with step h.
+    """ Apply a five point stencil to p[0:5], at p[2], with step h.
     Parameters
     ----------
     
@@ -27,6 +27,64 @@ def __Five_Point_Stencil(p, h):
     
     return ( 8.0 * (p[3] - p[1]) - (p[4] - p[0]) ) / (12.0 * h)
 
+def __Five_Point_Stencil_Assymmetric_F(p, h):
+    """ Apply a five point stencil to p[0:5], at p[1], with step h.
+    Parameters
+    ----------
+    
+    p : iterable
+    h : float
+    
+    Returns
+    -------
+    out : float
+    """
+    return (-10.0*p[1] + 18.0*p[2] - 3.0*p[0] - 6.0*p[3] + p[4]) / (12.0 * h)
+
+def __Five_Point_Stencil_Assymmetric_B(p, h):
+    """ Apply a five point stencil to p[0:5], at p[3], with step h.
+    Parameters
+    ----------
+    
+    p : iterable
+    h : float
+    
+    Returns
+    -------
+    out : float
+    """
+    return (10.0*p[3] + 3.0*p[4] - 18.0*p[2] + 6.0*p[1] - p[0]) / (12.0 * h)
+
+def __Five_Point_Stencil_Forward(p, h):
+    """ Apply a five point stencil to p[0:5], at p[0], with step h.
+    Parameters
+    ----------
+    
+    p : iterable
+    h : float
+    
+    Returns
+    -------
+    out : float
+    """
+    return (-25.0*p[0] + 48.0*p[1] - 36.0*p[2] + 16.0*p[3] - 3*p[4]) / (12.0 * h)
+
+def __Five_Point_Stencil_Backward(p, h):
+    """ Apply a five point stencil to p[0:5], at p[4], with step h.
+    Parameters
+    ----------
+    
+    p : iterable
+    h : float
+    
+    Returns
+    -------
+    out : float
+    """
+    return (25.0*p[4] - 48.0*p[3] + 36.0*p[2] - 16.0*p[1] + 3*p[0]) / (12.0 * h)
+
+
+###############################################################################
 def D1_5(data, step, axis = -1):
     """Calculate the derivative of an array whose domain is equally spaced. One
     or two dimensional arrays are supported.
@@ -111,6 +169,10 @@ def D1_5(data, step, axis = -1):
     out = -100.0 + 0.0*np.copy(data)
     
     if len(data_shape) == 1:
+        out[0] = __Five_Point_Stencil_Forward(data[0:5], step)
+        out[1] = __Five_Point_Stencil_Assymmetric_F(data[0:5], step)
+        out[-2] = __Five_Point_Stencil_Assymmetric_B(data[-5:], step)
+        out[-1] = __Five_Point_Stencil_Backward(data[-5:], step)
         for i in range(2, data_shape[0]-2):
             out[i] = __Five_Point_Stencil(data[i-2:i+3], step)
             #########################################
@@ -118,6 +180,10 @@ def D1_5(data, step, axis = -1):
             #########################################
     if len(data_shape) == 2:
         for j in range(data_shape[0]):
+            out[j,0] = __Five_Point_Stencil_Forward(data[j,0:5], step)
+            out[j,1] = __Five_Point_Stencil_Assymmetric_F(data[j,0:5], step)
+            out[j,-2] = __Five_Point_Stencil_Assymmetric_B(data[j,-5:], step)
+            out[j,-1] = __Five_Point_Stencil_Backward(data[j,-5:], step)
             for i in range(2, data_shape[1]-2):
                 out[j,i] = __Five_Point_Stencil(data[j,i-2:i+3], step)
                 #########################################

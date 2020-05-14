@@ -30,5 +30,28 @@ f(x+2\delta) - f(x - 2 \delta) &= f^{(1)}(x) \Big[4 \delta \Big] + f^{(3)}(x) \B
 &f^{(1)}(x) \approx \frac{8 \left( f(x+\delta) - f(x-\delta) \right) - \left( f(x+2\delta) - f(x-2\delta) \right)}{12 \delta}
 \end{align}
 
+\hrule
+
+\hrule
+
+Assymmetric Stencils:
+
+\begin{align}
+f^{(1)}(x) &\approx \frac{ -10 f(x) + 18 f(x+\delta) - 3 f(x-\delta) - 6 f(x+2\delta) + f(x+3\delta)}{12 \delta} \\
+&\approx \frac{1}{12 \delta} \Bigg[ -10 f(x) + \left( 18 f(x) + 18 f^{(1)}(x) \delta + 9 f^{(2)} (x) \delta^2 + 3 f^{(3)}(x) \delta^3 + \frac{3}{4} f^{(4)}(x) \delta^4 \right) \nonumber\\
+& \hspace{2.75cm} + \left( -3 f(x) + 3 f^{(1)}(x) \delta - \frac{3}{2} f^{(2)} (x) \delta^2 + \frac{1}{2} f^{(3)}(x) \delta^3 - \frac{1}{8} f^{(4)}(x) \delta^4  \right) \nonumber\\
+& \hspace{2.75cm} + \left( -6 f(x) - 12 f^{(1)}(x) \delta - 12 f^{(2)} (x) \delta^2 - 8 f^{(3)}(x) \delta^3 - 4 f^{(4)}(x) \delta^4  \right) \nonumber\\
+& \hspace{2.75cm} + \left( f(x) + 3 f^{(1)}(x) \delta + \frac{9}{2} f^{(2)} (x) \delta^2 + \frac{9}{2} f^{(3)}(x) \delta^3 + \frac{27}{8} f^{(4)}(x) \delta^4  \right) \Bigg] \nonumber \\
+&= \frac{1}{12 \delta} \Bigg[ 12 f^{(1)}(x) \delta \Bigg] = f^{(1)}(x) \nonumber
+\end{align}
+
+\begin{align}
+f^{(1)}(x) & \approx \frac{-25 f(x) + 48 f(x+\delta) - 36 f(x+2 \delta) + 16 f(x+3\delta) - 3 f(x+4 \delta)}{12 \delta} \\
+& \approx \frac{1}{12 \delta} \Bigg[ -25 f(x) + \left( 48 f(x) + 48 f^{(1)}(x) \delta + 24 f^{(2)}(x) \delta^2 + 8 f^{(3)}(x) \delta^3 + 2 f^{(4)}(x) \delta^4 \right) \nonumber \\
+& \hspace{2.75cm} + \left( -36 f(x) - 72 f^{(1)}(x) \delta - 72 f^{(2)}(x) \delta^2 - 48 f^{(3)}(x) \delta^3 - 24 f^{(4)}(x) \delta^4 \right) \nonumber \\
+& \hspace{2.75cm} + \left( 16 f(x) + 48 f^{(1)}(x) \delta + 72 f^{(2)}(x) \delta^2 + 72 f^{(3)}(x) \delta^3 + 54 f^{(4)}(x) \delta^4 \right) \nonumber \\
+& \hspace{2.75cm} + \left( - 3 f(x) - 12 f^{(1)}(x) \delta - 24 f^{(2)}(x) \delta^2 - 32 f^{(3)}(x) \delta^3 - 32 f^{(4)}(x) \delta^4 \right) \Bigg] \nonumber \\
+&= \frac{1}{12 \delta} \Bigg[ 12 f^{(1)}(x) \delta \Bigg] = f^{(1)}(x) \nonumber
+\end{align}
 
 \end{document}
